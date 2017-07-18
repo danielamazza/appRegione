@@ -10,8 +10,8 @@ Il sistema indicherà le varie possibilità di orario di uscita (timbratura in u
 - Presenza minima senza buono (4.30 ore di lavoro effettivo continuativo)
 - Presenza minima con buono da rientro facoltativo (5.30 ore di lavoro effettivo con uno stacco di 30 minuti e altre condizioni ...)
 - Presenza minima con buono da rientro obbligatorio (6.30 ore di lavoro effettivo con uno stacco di 30 minuti e altre condizioni ... )
-- Presenza di 7.12 senza buono (7.12 di lavoro effettivo continuativo)
-- Presenza di 7.12 conuono (7.12 di lavoro effettivo  con uno stacco di 30 minuti e altre condizioni ... )
+- Presenza di 7.12 ore senza buono (7.12 ore di lavoro effettivo continuativo)
+- Presenza di 7.12 ore con buono (7.12 ore di lavoro effettivo con uno stacco di 30 minuti e altre condizioni ... )
 
 # Pomeriggio
 Nel caso di stacco, impostando l'orario di uscita e di rientro, il sistema calcola l'orario minimo di timbratura a fine giornata, per:
