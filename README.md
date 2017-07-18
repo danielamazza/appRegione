@@ -1,6 +1,6 @@
 # Applicazione per la gestione degli orari secondo le regole della Regione Emilia-Romagna.
 Questi sono i file sorgenti dell'applicazione web che si trova all'indirizzo <a href="http://danielamazza.net/appRegione/">http://danielamazza.net/appRegione/</a>.
-Scegliere la propria fascia oraria nella pagina "Impostazioni".
+Impostare la propria fascia oraria nella pagina <b>Settings</b>
 Al mattino, impostare il proprio orario di arrivo (timbratura in ingresso) e cliccare su <b>Calcola</b>.
 Il sistema indicherà le varie possibilità di orario di uscita (timbratura in uscita a fine giornata):
 - Presenza minima senza buono (4.30 ore di lavoro effettivo continuativo)
