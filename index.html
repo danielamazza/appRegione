@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<!-- clockpicker -->
+	<script src="jquery-clockpicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery-clockpicker.min.css">
+    
+	
+	<title>App Regione</title>
+	<script src="elabDate.js"></script>
+	<style>
+		tr {
+			border-bottom: 1px solid lightgray;
+		}
+	</style>
+  </head>
+  <body>
+  <div data-role="page" id="pageone">
+    <div data-role="header">
+	<div data-role="navbar" class="navbarapp">
+    <ul>
+      <li><a href="#" class="ui-btn-active ui-state-persist" data-icon="home" >Home</a></li>
+      <li><a href="#pagetwo"  data-icon="check" >Pomeriggio</a></li>
+      <li><a href="#pagethree" data-icon="arrow-r" >Settings</a></li>
+      
+    </ul>
+  </div>
+      <h1>Calcola Orari</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>Tipo orario: <span id="visualizzaTipoOrario"></span></p>
+		<p>Imposta l'ora di arrivo:</p>
+		<div id="message" style="color: red;"></div>
+	    <form id="target" action="index.html">
+	    <div class="ui-grid-a">
+		    <div class="ui-block-a">
+			    <!-- <div data-role="fieldcontain">  -->              
+				   <input  name="oraArrivo" id="oraArrivo" value="09:00" data-default="09:00" data-inline="true" /> 
+			    <!-- </div> -->
+		    </div>
+		    <div class="ui-block-b">
+			    <input type="submit" id="but1" value="Calcola" data-inline="true" data-icon="carat-r" />
+		    </div>
+	    </div>
+		</form>
+        <table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive">
+		  <thead>
+			<tr>
+			  
+			  <th data-priority="2">Ora Uscita</th>      
+			  <th data-priority="1">Buono</th> 
+			  <th data-priority="3">Orario Lavorato effettivo</th>  
+			  <th data-priority="1"></th>  
+			</tr>
+
+		  </thead>
+		  <tbody>
+			<tr>
+			  
+			  <td><span id="uscita_min">13:30</span></td>      
+			  <td><p style="background-color:red;" class="ui-btn ui-corner-all ui-icon-alert ui-btn-icon-notext">NO</p></td>
+			  <td><span id="uscita_min_lav">4:30</span></td>
+			  <td>Presenza minima senza buono</td>
+			</tr>
+			<tr>
+			  
+			  <td><span id="uscita_bfac">14:30</span></td>
+			  <td><p style="background-color:yellow;" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-notext">FACOLTATIVO</p></td>
+			  <td><span id="uscita_bfac_lav">5:30</span></td>
+			  <td>Rientro facoltativo con stacco di 30 min (buono facoltativo)</td>      
+			</tr>
+			<tr>
+			  
+			  <td><span id="uscita_bobb">16:00</span></td>
+			  <td><p style="background-color:green;" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-notext" >OBBLIGATORIO</p></td>
+			  <td><span id="uscita_bobb_lav">6:30</span></td>    
+			  <td>Uscita minima per pomeriggio obbligatorio con stacco di 30 min (buono obbligatorio)</td>  
+			</tr>
+			<tr>
+			  
+			  <td><span id="uscita_712nob">16:12</span></td>
+			  <td><p style="background-color:red;" class="ui-btn ui-corner-all ui-icon-alert ui-btn-icon-notext">NO</p></td>
+			  <td>7:12</td>  
+			  <td>Presenza media giornaliera di 7 ore e 12 minuti senza stacco</td>    
+			</tr>
+			<tr>
+			  
+			  <td><span id="uscita_712b">16:42</span></td>
+			  <td><p style="background-color:green;" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-notext">OBBLIGATORIO</p></td>
+			  <td>7:12</td>
+			  <td>Presenza media giornaliera di 7 ore e 12 minuti con stacco di 30 min:</td>
+			</tr>
+			
+
+		  </tbody>
+		</table>
+	</div> <!-- ui-content -->
+ 
+	<div data-role="footer">
+		<h1>Powered by <a href="http://www.danielamazza.net" target="_blank">danielamazza.net</a></h1>
+	</div>
+</div><!-- div pageone -->
+
+
+<div data-role="page" id="pagetwo">
+    <div data-role="header">
+	<div data-role="navbar" class="navbarapp">
+    <ul>
+      <li><a href="#pageone" data-icon="home" >Home</a></li>
+      <li><a href="#" class="ui-btn-active ui-state-persist" data-icon="check" >Pomeriggio</a></li>
+      <li><a href="#pagethree" data-icon="arrow-r" >Settings</a></li>
+      
+    </ul>
+  </div>
+      <h1>Calcola Orari</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>Tipo orario: <span id="visualizzaTipoOrario2"></span></p>
+		<p>Imposta stacco:</p>
+	    <form id="stacco" action="index.html">
+	    <div class="ui-grid-a">
+		    <div class="ui-block-a">
+			    <!-- <div data-role="fieldcontain">  -->              
+				   <input  name="uscitaMattina" id="uscitaMattina" value="12:30" data-default="12:30" data-inline="true" /> 
+			    <!-- </div> -->
+		    </div>
+		    <div class="ui-block-b">
+		         <input  name="entrataPomeriggio" id="entrataPomeriggio"  value="13:00" data-default="13:00" data-inline="true" /> 
+			    <input type="submit" id="butStacco" value="Inserisci" data-inline="true" data-icon="carat-r" />
+		    </div>
+	    </div>
+		</form>
+		<div id="staccoOK">controllo stacco</div>	
+
+        <table data-role="table" id="table-uscita2" data-mode="reflow" class="ui-responsive">
+		  <thead>
+			<tr>
+			  
+			  <th data-priority="2">Ora Uscita</th>      
+			  <th data-priority="1">Buono</th> 
+			  <th data-priority="3">Orario Lavorato effettivo</th>  
+			  <th data-priority="1"></th>  
+			</tr>
+
+		  </thead>
+		  <tbody>
+			
+			  
+			  <td><span id="uscita_bfac_dopoStacco">14:30</span></td>
+			  <td><p style="background-color:yellow;" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-notext">FACOLTATIVO</p></td>
+			  <td><span id="uscita_bfac_lav_dopoStacco">5:30</span></td>
+			  <td>Rientro facoltativo </td>      
+			</tr>
+            <tr>
+			  
+			  <td><span id="uscita_bobb_dopoStacco">16:00</span></td>
+			  <td><p style="background-color:green;" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-notext" >OBBLIGATORIO</p></td>
+			  <td><span id="uscita_bobb_lav_dopoStacco">6:30</span></td>    
+			  <td>Rientro obbligatorio</td>  
+			</tr>
+			</tr>
+			
+
+		  </tbody>
+		</table>
+
+
+
+		
+	</div> <!-- ui-content -->
+ 
+	<div data-role="footer">
+		<h1>Powered by <a href="http://www.danielamazza.net" target="_blank">danielamazza.net</a></h1>
+	</div>
+</div><!-- div pagetwo -->
+
+
+
+<div data-role="page" id="pagethree">
+  <div data-role="header">
+     
+    <div data-role="navbar" class="navbarapp">
+      <ul>
+        <li><a href="#pageone" data-icon="home">Home</a></li>
+        <li><a href="#pagetwo"  data-icon="check" >Pomeriggio</a></li>
+        <li><a href="#" class="ui-btn-active ui-state-persist" data-icon="arrow-r">settings</a></li>
+      </ul>
+    </div>
+	<h1>Calcola Orari</h1>
+  </div>
+  
+  <div data-role="main" class="ui-content">
+	
+	<p>Tipo orario: <span id="visualizzaTipoOrario3"></span></p>
+	
+	<form id="settings" action="home.html" method="get">
+		<div data-role="fieldcontain">
+			<label for="selectTipoOrario">Modifica tipo orario:</label>
+			
+			<select name="selectTipoOrario" id="selectTipoOrario" >
+			<option value="s1">Standard (fascia obbl. 9:00-13:00)</option>
+			<option value="s2">Flessibilit&agrave; particolare 1 (fascia obbl. 10:00-13:00)</option>
+			<option value="s3">Flessibilit&agrave; particolare 2 (fascia obbl. 11:30-13:00)</option>
+			<option value="s4">Flessibilit&agrave; particolare 3 (fascia obbl. 9:00-12:30)</option>
+			<option value="s5">Flessibilit&agrave; particolare 1 + 3 (fascia obbl. 10:00-12:30)</option>
+			<option value="s6">Flessibilit&agrave; particolare 2 + 3 (fascia obbl. 11:30-12:30)</option>
+			<option value="s7">Orario differenziato 1 (nessun vincolo nella fascia 7:30-19:30)</option>
+			<option value="s8">Orario differenziato 2 (nessun vincolo nella fascia 0:00-23:59)</option>
+			</select>
+            </div>			
+			<input type="submit" id="but2" value="Salva Impostazioni"  data-icon="carat-r" data-inline="true"  />
+	</form>
+	
+  </div >
+  <div data-role="footer">
+    <h1>Powered by <a href="http://www.danielamazza.net" target="_blank">danielamazza.net</a></h1>
+  </div>
+</div><!-- div pagethree -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var checkTipoOrario = localStorage.getItem('TipoOrario');	
+    
+    document.getElementById("visualizzaTipoOrario").innerHTML = displayTipoOrario(checkTipoOrario);
+	document.getElementById("visualizzaTipoOrario2").innerHTML = displayTipoOrario(checkTipoOrario);
+	document.getElementById("visualizzaTipoOrario3").innerHTML = displayTipoOrario(checkTipoOrario);
+});
+$("#but2").click(function(){
+    location.reload();
+});
+</script>
+
+
+
+<script type="text/javascript">
+$('.clockpicker').clockpicker();
+</script>
+
+<script>
+$('#target').submit(function() {
+var oArr = parseInt(oraArrivo.value.slice(0,2)); 
+//alert(oArr);
+var mArr =  parseInt(oraArrivo.value.slice(3,5));
+//alert(mArr);
+var orarioIni = new Date();
+orarioIni.setHours(oArr);
+orarioIni.setMinutes(mArr);
+var tip = localStorage.getItem('TipoOrario');
+localStorage.setItem("ingresso_mattina", formatOrario(orarioIni));
+
+orarioIni = checkMattina(orarioIni,tip);
+orarioIni = checkMattinaRitardo(orarioIni,tip);
+
+
+var orario430 = addMinutesToDate(orarioIni,4.5*60);
+// attenzione, fare il controllo con la fascia obbligatoria
+document.getElementById("uscita_min").innerHTML = formatOrario(orario430);
+document.getElementById("uscita_min_lav").innerHTML = timePeriod(orarioIni, orario430,0);
+
+var pomCorto = new Date();
+pomCorto = addMinutesToDate(orarioIni,6*60);
+var quattordici=new Date();
+quattordici.setHours(14);
+quattordici.setMinutes(0);
+if (pomCorto < quattordici ) {
+  pomCorto = quattordici;
+}
+document.getElementById("uscita_bfac").innerHTML = formatOrario(pomCorto); 
+document.getElementById("uscita_bfac_lav").innerHTML = timePeriod(orarioIni, pomCorto,30);
+
+var pomLungo = new Date();
+pomLungo = addMinutesToDate(orarioIni,7*60);
+var sedici = new Date();
+sedici.setHours(16);
+sedici.setMinutes(0);
+if (pomLungo < sedici) { 
+  pomLungo = sedici;
+}
+document.getElementById("uscita_bobb").innerHTML = formatOrario(pomLungo); 
+document.getElementById("uscita_bobb_lav").innerHTML = timePeriod(orarioIni, pomLungo,30);
+
+
+var sette12stacco=new Date();
+sette12stacco=addMinutesToDate(orarioIni,7*60+42);
+document.getElementById("uscita_712b").innerHTML = formatOrario(sette12stacco); 
+sette12nostacco=addMinutesToDate(orarioIni,7*60+12);
+document.getElementById("uscita_712nob").innerHTML = formatOrario(sette12nostacco); 
+return false;
+}); 
+</script> 
+<script>
+
+var input = $('#oraArrivo');
+input.clockpicker({
+    autoclose: true
+});
+
+var input2 = $('#uscitaMattina');
+input2.clockpicker({
+    autoclose: true
+});
+
+var input3 = $('#entrataPomeriggio');
+input3.clockpicker({
+    autoclose: true
+});
+</script>
+
+
+
+<script>
+// controllo stacco
+$('#stacco').submit(function() {
+var oum = parseInt(uscitaMattina.value.slice(0,2)); 
+var mum =  parseInt(uscitaMattina.value.slice(3,5));
+var oip = parseInt(entrataPomeriggio.value.slice(0,2));
+var mip =  parseInt(entrataPomeriggio.value.slice(3,5));
+var orarioum = new Date();
+var orarioip = new Date();
+orarioum.setHours(oum);
+orarioum.setMinutes(mum);
+orarioip.setHours(oip);
+orarioip.setMinutes(mip);
+localStorage.setItem("uscita_mattina", formatOrario(orarioum));
+localStorage.setItem("ingresso_pomeriggio", formatOrario(orarioip));
+durataStacco = parseInt((orarioip - orarioum)/ 60000);
+if (durataStacco < 30 || durataStacco > 120) {
+    document.getElementById("table-uscita2").style.visibility="hidden"; 
+	document.getElementById("staccoOK").innerHTML = "Stacco NON valido (" + durataStacco +"min.)";
+} else{
+   document.getElementById("staccoOK").innerHTML = "Stacco valido (" + durataStacco +"min.)";
+   
+   var oraDopo = addMinutesToDate(orarioip,60);
+   var quattordici = new Date();
+   quattordici.setHours(14);
+   quattordici.setMinutes(0);
+   
+   if (oraDopo < quattordici) {
+      oraDopoC = quattordici;
+   }
+   else {
+      oraDopoC = oraDopo;
+   }
+   
+   var sedici = new Date();
+   sedici.setHours(16);
+   sedici.setMinutes(0);
+   if (oraDopo < sedici) { 
+    oraDopoL = sedici;
+   }
+   else {
+    oraDopoL = oraDopo;
+   }
+   
+   document.getElementById("table-uscita2").style.visibility="visible";
+   
+   document.getElementById("uscita_bfac_dopoStacco").innerHTML = formatOrario(oraDopoC); 
+   
+   document.getElementById("uscita_bfac_lav_dopoStacco").innerHTML = timePeriod(creaData(localStorage.getItem('ingresso_mattina')), oraDopoC, durataStacco);
+   
+   document.getElementById("uscita_bobb_dopoStacco").innerHTML = formatOrario(oraDopoL); 
+   document.getElementById("uscita_bobb_lav_dopoStacco").innerHTML = timePeriod(creaData(localStorage.getItem('ingresso_mattina')), oraDopoL, durataStacco);
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+}
+return false; 
+}); 
+</script>
+
+
+<script>
+$('#settings').submit(function() {
+var setTipoOrario = $('#selectTipoOrario').val();
+if (typeof(Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("TipoOrario", setTipoOrario);
+    // Retrieve
+} else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+
+return false; 
+}); 
+</script>
+
+
+
+
+
+ 
+    
+    </body>
+</html>

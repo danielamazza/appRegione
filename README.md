@@ -1,0 +1,2 @@
+# Applicazione per la gestione degli orari secondo le regole della Regione Emilia-Romagna.
+Questi sono i file sorgenti dell'applicazione web che si trova all'indirizzo <a href="http://danielamazza.net/appRegione/">http://danielamazza.net/appRegione/</>
